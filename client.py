@@ -49,10 +49,10 @@ if __name__ == "__main__":
     Replace "test" with your secret ID and just run this file 
     to verify that the server is working for your ID.
     """
-
+    print("running")
     err = get_errors('test', list(-np.arange(0,1.1,0.1)))
     assert len(err) == 2
-
+    print("finished error request")
     submit_status = submit('test', list(-np.arange(0,1.1,0.1)))
     assert "submitted" in submit_status
     
