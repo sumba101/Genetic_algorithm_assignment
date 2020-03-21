@@ -12,10 +12,10 @@ def cal_pop_fitness(vector):
     # Calculating the fitness value of each solution in the current population.
     for itr in range( population_number ):
         temp = list( vector[itr][1:] )  # take each of the genes
-        print("query number:- ",itr)
+        
         err = client.get_errors( secret_key, temp )
-        vector[itr][0] = 0.5*err[0] + 1.3*err[1]  # taking fitness as the sum of the errors
-
+        vector[itr][0] = 0.5*err[0] + 1.2*err[1]  # taking fitness as the sum of the errors
+        print("query number:- ",itr, vector[itr][0])
     np.argsort( vector[:, 0] )
 
 
@@ -91,22 +91,22 @@ def generation():
     save_population(page)
 
 if __name__ == "__main__":
-    # vector = initialize_population()
-    # initial = vector
-    # print("Population has been loaded")
-    # parents = select_mating_pool( vector, 20 )
-    # offspring = crossover( parents, 20 )
-    # temp=mutation(offspring,parents,20,20)
-    # print("New population has been created")
-    # new=np.append(np.zeros((40,1)),temp,axis=1)
-    # print("starting fitness measure now")
-    # cal_pop_fitness(new)
-    # print("fitness measured")
-    # total_population=np.append(initial,new,axis=0)
-    # np.argsort( total_population[:, 0] )
-    # #save_population(total_population)
-    #
-    # final_population=total_population[:40,:] #choosing top 40
-    # save_population(final_population)
-    # print("population has been saved")
+    vector = initialize_population()
+    initial = vector
+    print("Population has been loaded")
+    parents = select_mating_pool( vector, 20 )
+    offspring = crossover( parents, 20 )
+    temp=mutation(offspring,parents,20,20)
+    print("New population has been created")
+    new=np.append(np.zeros((40,1)),temp,axis=1)
+    print("starting fitness measure now")
+    cal_pop_fitness(new)
+    print("fitness measured")
+    total_population=np.append(initial,new,axis=0)
+    np.argsort( total_population[:, 0] )
+    #save_population(total_population)
+    
+    final_population=total_population[:40,:] #choosing top 40
+    save_population(final_population)
+    print("population has been saved")
     generation()
