@@ -1,5 +1,6 @@
 # TEAM NUMBER 91
 import random
+import re 
 
 overweight_error=3.705362469604573213e+06
 population_number = 40
@@ -77,7 +78,9 @@ def initialize_population():  # load previous population as per status
     with open("./saved_populations.txt","w") as f:
         pass #to truncate the saved_populations file
 
+    np.savetxt( './temp.txt', returnable, delimiter=',' )
     return returnable
+
 
 if __name__ == "__main__":
     vector = initialize_population()
