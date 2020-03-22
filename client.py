@@ -50,9 +50,18 @@ if __name__ == "__main__":
     to verify that the server is working for your ID.
     """
     print("running")
-    err = get_errors('test', list(-np.arange(0,1.1,0.1)))
+    err = get_errors('jOZFaYXSYOb7jnBxC3u7F66X1uRy6oOvLnWyHc1TQeu7zhCSB4', [-7.810503810575697425e-01,2.249750646858881542e-01,-6.823840839346558163e+00,-6.635547926274353303e-01,-7.561125745275590337e-02,1.860489450620816665e-01,-9.606348351822812104e-01,-6.750149915342297247e-01,5.377553912974620820e-01,9.570554538540849698e-01,4.328127847805320894e-01])
     assert len(err) == 2
     print("finished error request")
-    submit_status = submit('test', list(-np.arange(0,1.1,0.1)))
-    assert "submitted" in submit_status
+    print(err, err[1])
+
+    print( "running" )
+    err = get_errors( 'jOZFaYXSYOb7jnBxC3u7F66X1uRy6oOvLnWyHc1TQeu7zhCSB4',
+                      [6.807785660514034110e-01,6.053076917263464640e-01,-5.379694936573812925e+00,5.365491358890800422e-01,-4.569004977576232029e-01,-8.970144317105099852e-01,-4.293032136916184460e-01,-7.051820362819628818e-02,-1.804532752574311005e-01,-1.699647031586449739e-02,1.341636315976826033e-01] )
+    assert len( err ) == 2
+    print( "finished error request" )
+    print( err, err[1]  )
+
+    # submit_status = submit('test', list(-np.arange(0,1.1,0.1)))
+    # assert "submitted" in submit_status
     
