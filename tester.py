@@ -1,9 +1,10 @@
 # TEAM NUMBER 91
 import random
-import re
+
 
 overweight_error = 3.705362469604573213e+06
-population_number = 6
+population_number = 40
+# andras_key='UFmhysilLsJ2qyhJxdrCFR3KpT4arHF1w7Rkgu8wHbywxCQkw4'
 secret_key = 'jOZFaYXSYOb7jnBxC3u7F66X1uRy6oOvLnWyHc1TQeu7zhCSB4'
 import numpy as np
 import client
@@ -15,8 +16,8 @@ def cal_pop_fitness(vector):
         temp = list( vector[itr][1:] )  # take each of the genes
 
         err = client.get_errors( secret_key, temp )
-        vector[itr][0] = 0.5 * err[0] + 1.2 * err[1]  # taking fitness as the sum of the errors
-        print( "query number:- ", itr, vector[itr][0] )
+        vector[itr][0] = err[1] + err[0]
+        print( "query number:- ", itr, err )
 
 
 def select_mating_pool(vector, num_parents):
@@ -27,13 +28,13 @@ def select_mating_pool(vector, num_parents):
 def crossover(parents, offspring_size):
     offspring = np.empty( (offspring_size, 11) )
 
-    crossover_point = 5
+    crossover_point = random.randrange( 2, 9 )
 
     for k in range( offspring_size ):
         # Index of the first parent to mate.
-        parent1_idx = k % 3
+        parent1_idx = k % 20
         # Index of the second parent to mate.
-        parent2_idx = (k + 1) % 3
+        parent2_idx = (k + 1) % 20
 
         # The new offspring will have its first half of its genes taken from the first parent.
         offspring[k, 0:crossover_point] = parents[parent1_idx, 0:crossover_point]
@@ -44,7 +45,7 @@ def crossover(parents, offspring_size):
 
 
 def mutate(val, start, stop):
-    temp = val + random.uniform( start, stop )
+    temp = val * random.uniform( start, stop )
     if (temp > 10.0):
         return mutate( val, start, 10 - val )
     if temp < -10.0:
@@ -66,38 +67,37 @@ def mutation(offspring, parents, offspring_no, parents_no):
 
 
 def initialize_population():  # load previous population as per status
-    # returnable = np.loadtxt( "./saved_populations.txt", delimiter=',' )
-    returnable = np.loadtxt( "./saved_populations.txt", delimiter=',' )
+    returnable = np.loadtxt( "./safety.txt", delimiter=',' )
 
-    np.savetxt( './temp.txt', returnable, delimiter=',' )
+    # np.savetxt( './temp.txt', returnable, delimiter=',' )
     return returnable
 
 
 if __name__ == "__main__":
-    # vector = initialize_population()
-    # print( "Population has been loaded" )
-    #
-    # parents = select_mating_pool( vector, 3 )
-    # offspring = crossover( parents, 3 )
-    #
-    # np.savetxt( './parents.txt', parents, delimiter=',' )
-    # np.savetxt( './offspring.txt', offspring, delimiter=',' )
-    #
-    # temp = mutation( offspring, parents, 3, 3 )
+    vector = initialize_population()
+
+    print( "Population has been loaded" )
+
+    parents = select_mating_pool( vector, 40 )
+    # offspring = crossover( parents, 20 )
+    # temp = mutation( offspring, parents, 20, 20 )
     # print( "New population has been created" )
     #
-    # np.savetxt( './mutated_offspring.txt', temp, delimiter=',' )
-    #
-    # new = np.append( np.zeros( (6, 1) ), temp, axis=1 )
+    # new = np.append( np.zeros( (40, 1) ), temp, axis=1 )
     # print( "starting fitness measure now" )
-    #
-    # cal_pop_fitness( new )
+
+    # cal_pop_fitness( vector )
     # print( "fitness measured" )
+    #
+    # # initial = np.loadtxt("./temp.txt",delimiter=',')
+    #
+    # np.savetxt("./before.txt",vector,delimiter=',')
+    # vector = vector[vector[:, 0].argsort()]
+    # np.savetxt("./after.txt",vector,delimiter=',')
+    # print("done")
 
-    # np.savetxt( './evaluated_population.txt', new, delimiter=',' )
+    for itr in range( 39 ):
+        temp = list( parents[itr] )  # take each of the genes
 
-
-    total_population = np.loadtxt( "./saved_populations.txt", delimiter=',' )
-
-    total_population = total_population[total_population[:, 0].argsort()]
-    np.savetxt( './saved_populations.txt', total_population, delimiter=',' )
+        submit_status = client.submit( secret_key, temp )
+        print( "query number:- ", itr, submit_status )

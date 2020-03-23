@@ -1,4 +1,6 @@
 # TEAM NUMBER 91
+# TODO:
+# Saved populations and temp has been reinitialized with weight vectors and their validation error only, run this for 5 iterations, then change it up to 0.5+1 error values then try with 1+1 ratiowe
 import random
 
 
@@ -15,8 +17,8 @@ def cal_pop_fitness(vector):
         temp = list( vector[itr][1:] )  # take each of the genes
 
         err = client.get_errors( secret_key, temp )
-        vector[itr][0] = err[1]  # taking fitness as validation error for now
-        print( "query number:- ", itr, vector[itr][0] )
+        vector[itr][0] = err[1] + 0.5 * err[0]  # taking fitness as validation error for now
+        print( "query number:- ", itr, err )
 
 
 def select_mating_pool(vector, num_parents):

@@ -1,0 +1,16 @@
+This is just a personal report and record for personal reference
+initially the fitness function was set as nothing but only the Validation error and run for 100-130 times
+    ( 1 time = 40 requests )
+now the top best vectors are barely even changing
+the best vectors from this is stored in BestVectorsFromJustValidation.txt
+    the first values in it are the summation errors
+so i am now changing the fitness function to also include the test error
+    i want to do so gradually so im doing it as 0.5* test error + validation error for now
+After 100 runs of the code with the above fitness function, we see everything has improved except first two vectors
+gonna hit up 10 more iterations
+still same state
+saving these vectors in file phase2.txt
+submitted first 39 weight vectors from phase2.txt
+
+TODO:
+will change fitness function to summation of both the errors and run next
