@@ -3,8 +3,7 @@
 # Saved populations and temp has been reinitialized with weight vectors and their validation error only, run this for 5 iterations, then change it up to 0.5+1 error values then try with 1+1 ratiowe
 import random
 
-
-overweight_error = 3.705362469604573213e+06
+overweight_error = 3.705362469604573213e+06  # this was the starting point for it all
 population_number = 40
 secret_key = 'jOZFaYXSYOb7jnBxC3u7F66X1uRy6oOvLnWyHc1TQeu7zhCSB4'
 import numpy as np
@@ -17,7 +16,7 @@ def cal_pop_fitness(vector):
         temp = list( vector[itr][1:] )  # take each of the genes
 
         err = client.get_errors( secret_key, temp )
-        vector[itr][0] = err[1] + 0.5 * err[0]  # taking fitness as validation error for now
+        vector[itr][0] = err[1] + err[0]  # taking fitness as sum for phase three
         print( "query number:- ", itr, err )
 
 
@@ -29,7 +28,7 @@ def select_mating_pool(vector, num_parents):
 def crossover(parents, offspring_size):
     offspring = np.empty( (offspring_size, 11) )
 
-    crossover_point = random.randrange( 2, 9 )
+    crossover_point = random.randrange( 1, 9 )
 
     for k in range( offspring_size ):
         # Index of the first parent to mate.

@@ -12,5 +12,15 @@ still same state
 saving these vectors in file phase2.txt
 submitted first 39 weight vectors from phase2.txt
 
-TODO:
-will change fitness function to summation of both the errors and run next
+LMAO one of the vectors in the 39 submitted is THE best in the batch right now
+current best test error = 212166.1301339236
+
+Phase 3
+Traing on fitness( 1+1 ratio) hasnt improved anything in the top vectors
+obviously we are seeing plateauing
+#TODO:
+Possible things to do next
+a) change fitness ratio to 1.7+1
+b) change fitness ratio to 1+1.7
+c) change up the crossover subroutine to mix up first 10 with last 10 vectors to possibly get better variation
+I believe i should do c first then go for b then a
