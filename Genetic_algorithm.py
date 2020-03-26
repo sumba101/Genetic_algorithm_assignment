@@ -1,6 +1,4 @@
 # TEAM NUMBER 91
-# TODO:
-# Saved populations and temp has been reinitialized with weight vectors and their validation error only, run this for 5 iterations, then change it up to 0.5+1 error values then try with 1+1 ratiowe
 import random
 
 overweight_error = 3.705362469604573213e+06  # this was the starting point for it all
@@ -56,12 +54,12 @@ def mutate(val, start, stop):
 def mutation(offspring, parents, offspring_no, parents_no):
     for idx in range( offspring_no ):
         for g in range( 0, 11 ):
-            temp = mutate( offspring[idx][g], -1.0, 1.0 )
+            temp = mutate( offspring[idx][g], -2.0, 2.0 )
             offspring[idx][g] = temp
 
     for idx in range( parents_no ):
         for g in range( 0, 11 ):
-            temp = mutate( parents[idx][g], -1.0, 1.0 )
+            temp = mutate( parents[idx][g], -2.0, 2.0 )
             parents[idx][g] = temp
     return np.append( parents, offspring, axis=0 )
 
@@ -74,6 +72,8 @@ def initialize_population():  # load previous population as per status
 
 
 if __name__ == "__main__":
+    # TODO:
+    # Remember, at the start of every phase, check you saved_populations, the first field must be the corresponding error rate of the phases cal_pop_fitness
     vector = initialize_population()
 
     print( "Population has been loaded" )
@@ -89,12 +89,12 @@ if __name__ == "__main__":
     cal_pop_fitness( new )
     print( "fitness measured" )
 
-    initial = np.loadtxt("./temp.txt",delimiter=',')
+    initial = np.loadtxt( "./temp.txt", delimiter=',' )
 
     total_population = np.append( initial, new, axis=0 )
-    np.savetxt("./before.txt",total_population,delimiter=',')
+    np.savetxt( "./before.txt", total_population, delimiter=',' )
     total_population = total_population[total_population[:, 0].argsort()]
-    np.savetxt("./after.txt",total_population,delimiter=',')
+    np.savetxt( "./after.txt", total_population, delimiter=',' )
 
     final_population = total_population[:40, :]
 

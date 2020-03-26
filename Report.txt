@@ -18,9 +18,14 @@ current best test error = 212166.1301339236
 Phase 3
 Traing on fitness( 1+1 ratio) hasnt improved anything in the top vectors
 obviously we are seeing plateauing
-#TODO:
-Possible things to do next
-a) change fitness ratio to 1.7+1
-b) change fitness ratio to 1+1.7
-c) change up the crossover subroutine to mix up first 10 with last 10 vectors to possibly get better variation
-I believe i should do c first then go for b then a
+
+Phase4
+changed mutation to +-1.5
+first running for 75 times
+LMAO, massive number of extremely good weight vectors, doing +-2.0 now, god save lets go
+bruh should have submitted the vectors produced by +-1.5 first
+fuck it, hope for the best
+LMAO 39 new vectors to submit lets get this bread
+ok phase 4 can be deemed a success now
+
+TODO: 1) submit phase 4 2) start phase 5 (playing with crossover) 3)phase 6 is injecting higher magnitude vectors and playing around with the crossover for that

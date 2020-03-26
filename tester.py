@@ -96,8 +96,3 @@ if __name__ == "__main__":
     # np.savetxt("./after.txt",vector,delimiter=',')
     # print("done")
 
-    for itr in range( 39 ):
-        temp = list( parents[itr] )  # take each of the genes
-
-        submit_status = client.submit( secret_key, temp )
-        print( "query number:- ", itr, submit_status )
